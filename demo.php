@@ -19,7 +19,7 @@
                 <option value="blacklistStatus">黑名单建立和快速查询：查询黑名单状态</option>
                 <option value="closeRelationshipInfo">深度欺诈检测：关系密切检测</option>
                 <option value="fraudScore">深度欺诈检测：深度欺诈检测</option>
-                <option value="gangDetectionInfo">团伙欺诈检测：关系密切检测</option>
+                <option value="gangDetectionInfo">团伙欺诈检测：欺诈团伙判定</option>
                 <option value="fraudDetectionInfo">欺诈调查指导：欺诈倾向判定</option>
             </select>
         </div>

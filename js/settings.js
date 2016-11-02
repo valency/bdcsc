@@ -8,7 +8,7 @@ var API_LIST = {
         name: "中国电信手机号",
         example: "18988843180"
     }],
-    closeRelationship: [{
+    closeRelationshipInfo: [{
         id: "mdn",
         name: "中国电信手机号",
         example: "18988843180"

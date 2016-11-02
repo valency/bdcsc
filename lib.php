@@ -2,7 +2,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="BDCSC 2.x 服务 HTTP 接口使用 Demo" name="description"/>
-<meta content="云数信息科技（深圳）有限公司" name="author"/>
+<meta content="中国电信云公司" name="author"/>
 
 <link rel="shortcut icon" href="favicon.ico"/>
 
