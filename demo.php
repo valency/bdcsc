@@ -28,7 +28,7 @@
     <div class="well bs-component hidden" id="div-form">
         <div class="row">
             <div class="col-md-12">
-                <div class="form-horizontal">
+                <form class="form-horizontal" action="javascript:void(0)">
                     <fieldset>
                         <div id="div-params"></div>
                         <div class="form-group">
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </fieldset>
-                </div>
+                </form>
             </div>
         </div>
     </div>
