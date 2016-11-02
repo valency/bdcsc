@@ -8,6 +8,11 @@ body {
     margin-bottom: 63px;
 }
 
+a:hover {
+    text-decoration: none;
+    background-color: white;
+}
+
 footer {
     position: absolute;
     bottom: 0;
@@ -23,3 +28,22 @@ footer > p {
     padding: 0 1em;
 }
 
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}

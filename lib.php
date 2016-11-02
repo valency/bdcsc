@@ -11,3 +11,8 @@
 
 <script type="text/javascript" src="lib/jquery-3.1.0/jquery-3.1.0.min.js"></script>
 <script type="text/javascript" src="lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/jquery-cookie-1.4.1/jquery.cookie.js"></script>
+<script type="text/javascript" src="lib/cryptojs-1.0/rollups/md5.js"></script>
+
+<script type="text/javascript" src="js/settings.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
