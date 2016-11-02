@@ -1,7 +1,7 @@
 <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="BDCSC 2.x 服务 HTTP 接口使用 Demo" name="description"/>
+<meta content="大数据车险反欺诈系统" name="description"/>
 <meta content="中国电信云公司" name="author"/>
 
 <link rel="shortcut icon" href="favicon.ico"/>
