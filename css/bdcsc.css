@@ -3,8 +3,12 @@ html {
     min-height: 100%;
 }
 
-body {
+body, table {
     font-family: "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+    font-size: 14px;
+}
+
+body {
     margin-bottom: 63px;
 }
 
@@ -46,4 +50,9 @@ footer > p {
 
 .key {
     color: red;
+}
+
+.navbar-nav li a > img {
+    height: 2em;
+    margin-top: -0.5em;
 }
