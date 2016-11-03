@@ -78,7 +78,8 @@ function api_request() {
                 $("#result-table").DataTable({language: DT_LANG});
                 break;
             case "fraudDetectionInfo":
-                if (v == "true") r = error_message("存在欺诈倾向");
+                var vv = v.split("\n");
+                if (vv[0] == "true") r = error_message("存在欺诈倾向，与查询号码关系密切的黑名单用户：" + vv[1]);
                 else r = success_message("不存在欺诈倾向");
                 result_pane.html("<pre>" + r + "</pre>");
                 break;
