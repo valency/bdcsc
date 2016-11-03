@@ -1,8 +1,11 @@
 $(document).ready(function () {
     auth_check();
-    $("#menu-" + get_url_parameter("f")).addClass("active");
+    var p = get_url_parameter("f");
+    if (p == undefined || p == null || p == "") p = 0;
+    else p = parseInt(p);
+    $("#menu-" + p).addClass("active");
     for (var i = 0; i < 4; i++) {
-        if (i != parseInt(get_url_parameter("f"))) $(".api-group-" + i).remove();
+        if (i != p) $(".api-group-" + i).remove();
     }
     api_switch();
     $("#select-api").on("change", function () {
