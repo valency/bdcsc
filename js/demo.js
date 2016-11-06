@@ -57,17 +57,18 @@ function api_request() {
             break;
         case "fraudScore":
             v = "0.165027";
-            result_pane.html("<pre>当前查询号码的欺诈可能性评分：" + v + "</pre><div class='echart'></div>");
+            result_pane.html("<pre><b>当前查询号码的欺诈可能性评分：</b>" + v + "</pre><div class='echart'></div>");
             echarts.init($(".echart")[0]).setOption({
                 series: [{
                     type: 'gauge',
                     detail: {formatter: '{value}%'},
-                    data: [{name: "欺诈评分", value: parseFloat(v) * 100.0}]
+                    data: [{name: "欺诈评分", value: (parseFloat(v) * 100.0).toFixed(2)}]
                 }]
             });
             break;
         case "gangDetectionInfo":
             v = "3\n1,2,0.082514\n1,3,0.000000\n2,3,0.000000\n0.082514";
+            result_pane.html("<div class='echart-half'></div><div class='echart-half'></div>");
             // var header = ["号码 A", "号码 B", "成员间的关系密切度"];
             // var html = "<table id='result-table' class='table table-striped table-hover'>";
             // html += "<thead><tr>";
