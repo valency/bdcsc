@@ -2,6 +2,7 @@
 <head>
     <?php include_once "lib.php"; ?>
     <title>大数据车险反欺诈系统</title>
+    <link rel="stylesheet" type="text/css" href="css/demo.css"/>
     <script type="text/javascript" src="js/demo.js"></script>
 </head>
 <body>
@@ -10,9 +11,7 @@
     <div class="row" id="div-list">
         <div class="col-md-12">
             <select class="form-control" id="select-api">
-                <option class="api-group-0" value="blacklistInfo">黑名单建立和快速查询：获取当前欺诈黑名单列表</option>
                 <option class="api-group-0" value="blacklistStatus">黑名单建立和快速查询：查询黑名单状态</option>
-                <option class="api-group-1" value="closeRelationshipInfo">深度欺诈检测：关系密切检测</option>
                 <option class="api-group-1" value="fraudScore">深度欺诈检测：深度欺诈检测</option>
                 <option class="api-group-2" value="gangDetectionInfo">团伙欺诈检测：欺诈团伙判定</option>
                 <option class="api-group-3" value="fraudDetectionInfo">欺诈调查指导：欺诈倾向判定</option>

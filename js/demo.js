@@ -37,35 +37,71 @@ function api_request() {
     }
     var result_pane = $("#div-result");
     result_pane.html(loading_message("载入中..."));
-    $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + API_KEY + "/" + $.cookie("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
-        var v = resp["data"]["value"];
-        switch (api_id) {
-            case "blacklistInfo":
-                result_pane.html(create_table_from_csv(v, ["欺诈号码", "保险公司标识"]));
-                $("#result-table").DataTable({language: DT_LANG});
-                break;
-            case "blacklistStatus":
-                if (v == "true") var r = error_message("涉嫌欺诈");
-                else r = success_message("没有涉嫌欺诈");
-                result_pane.html("<pre>" + r + "</pre>");
-                break;
-            case "closeRelationshipInfo":
-                result_pane.html(create_table_from_csv(v, ["号码 A", "号码 B", "密切程度"]));
-                $("#result-table").DataTable({language: DT_LANG});
-                break;
-            case "fraudScore":
-                result_pane.html("<pre>当前查询号码的欺诈可能性评分：" + v + "</pre>");
-                break;
-            case "gangDetectionInfo":
-                var header = ["号码 A", "号码 B", "成员间的关系密切度"];
+    // $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + API_KEY + "/" + $.cookie("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
+    //     var v = resp["data"]["value"];
+    switch (api_id) {
+        case "blacklistStatus":
+            var v = "true\n车主,1,3,2100.0";
+            var vv = v.split("\n");
+            if (vv[0] == "true") {
+                vv[1] = vv[1].split(",");
+                var r = error_message("涉嫌欺诈");
+                r += "<ul>";
+                r += "<li><b>当前黑名单用户的理赔角色：</b>" + vv[1][0] + "</li>";
+                r += "<li><b>当前黑名单用户的持有保单数量：</b>" + vv[1][1] + "</li>";
+                r += "<li><b>当前黑名单用户的历史出险次数：</b>" + vv[1][2] + "</li>";
+                r += "<li><b>当前黑名单用户的历史赔付金额：</b>" + vv[1][3] + "</li>";
+                r += "</ul>";
+            } else r = success_message("没有涉嫌欺诈");
+            result_pane.html("<pre>" + r + "</pre>");
+            break;
+        case "fraudScore":
+            v = "0.165027";
+            result_pane.html("<pre>当前查询号码的欺诈可能性评分：" + v + "</pre><div class='echart'></div>");
+            echarts.init($(".echart")[0]).setOption({
+                series: [{
+                    type: 'gauge',
+                    detail: {formatter: '{value}%'},
+                    data: [{name: "欺诈评分", value: parseFloat(v) * 100.0}]
+                }]
+            });
+            break;
+        case "gangDetectionInfo":
+            v = "3\n1,2,0.082514\n1,3,0.000000\n2,3,0.000000\n0.082514";
+            // var header = ["号码 A", "号码 B", "成员间的关系密切度"];
+            // var html = "<table id='result-table' class='table table-striped table-hover'>";
+            // html += "<thead><tr>";
+            // for (i = 0; i < header.length; i++) {
+            //     html += "<th>" + header[i] + "</th>";
+            // }
+            // html += "</tr></thead><tbody>";
+            // var rows = v.split("\n");
+            // for (i = 0; i < rows.length - 1; i++) {
+            //     html += "<tr>";
+            //     var cols = rows[i].split(",");
+            //     for (var j = 0; j < cols.length; j++) {
+            //         html += "<td>" + cols[j] + "</td>";
+            //     }
+            //     html += "</tr>";
+            // }
+            // html += "</tbody></table>";
+            // result_pane.html("<pre>欺诈团伙的可能性评分：" + rows[rows.length - 1] + "</pre><hr/>" + html);
+            // $("#result-table").DataTable({language: DT_LANG});
+            break;
+        case "fraudDetectionInfo":
+            v = "false\n1\n定损员,1,3,2100.0";
+            var rows = v.split("\n");
+            if (rows[0] == "true") {
+                result_pane.html("<pre>" + success_message("无欺诈倾向") + "</pre>");
+            } else {
+                var header = ["理赔角色", "持有保单数量", "历史出险次数", "历史赔付金额"];
                 var html = "<table id='result-table' class='table table-striped table-hover'>";
                 html += "<thead><tr>";
-                for (var i = 0; i < header.length; i++) {
+                for (i = 0; i < header.length; i++) {
                     html += "<th>" + header[i] + "</th>";
                 }
                 html += "</tr></thead><tbody>";
-                var rows = v.split("\n");
-                for (i = 0; i < rows.length - 1; i++) {
+                for (i = 2; i < rows.length; i++) {
                     html += "<tr>";
                     var cols = rows[i].split(",");
                     for (var j = 0; j < cols.length; j++) {
@@ -74,22 +110,17 @@ function api_request() {
                     html += "</tr>";
                 }
                 html += "</tbody></table>";
-                result_pane.html("<pre>欺诈团伙的可能性评分：" + rows[rows.length - 1] + "</pre><hr/>" + html);
+                result_pane.html("<pre>" + error_message("存在欺诈倾向") + "\n<b>与所查询号码关系密切的黑名单用户数量：</b>" + rows[1] + "</pre><hr/>" + html);
                 $("#result-table").DataTable({language: DT_LANG});
-                break;
-            case "fraudDetectionInfo":
-                var vv = v.split("\n");
-                if (vv[0] == "true") r = error_message("存在欺诈倾向，与查询号码关系密切的黑名单用户：" + vv[1]);
-                else r = success_message("不存在欺诈倾向");
-                result_pane.html("<pre>" + r + "</pre>");
-                break;
-            default:
-                result_pane.html("<pre>" + syntax_highlight(resp) + "</pre>");
-        }
-    }).fail(function (resp) {
-        resp = eval("(" + resp["responseText"] + ")");
-        result_pane.html("<span class='text-danger'><strong>" + resp["code"] + "</strong> " + resp["message"] + "</span>");
-    });
+            }
+            break;
+        default:
+            result_pane.html("<pre>" + syntax_highlight(resp) + "</pre>");
+    }
+    // }).fail(function (resp) {
+    //     resp = eval("(" + resp["responseText"] + ")");
+    //     result_pane.html("<span class='text-danger'><strong>" + resp["code"] + "</strong> " + resp["message"] + "</span>");
+    // });
 }
 
 function create_table_from_csv(csv, header) {

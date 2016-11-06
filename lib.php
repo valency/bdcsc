@@ -19,6 +19,7 @@
 <script type="text/javascript" src="lib/bootbox-4.4.0/bootbox.min.js"></script>
 <script type="text/javascript" src="lib/datatables-1.10.12/media/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/datatables-1.10.12/media/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/echarts-3.3.1/echarts.min.js"></script>
 
 <script type="text/javascript" src="js/settings.js"></script>
 <script type="text/javascript" src="js/common.js"></script>

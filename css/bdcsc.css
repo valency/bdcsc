@@ -52,7 +52,8 @@ footer > p {
     color: red;
 }
 
-.navbar-nav li a > img {
-    height: 2em;
-    margin-top: -0.5em;
+.navbar-nav li a {
+    padding-left: 50px;
+    padding-right: 50px;
+    font-size: 16px;
 }

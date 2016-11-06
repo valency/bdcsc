@@ -2,37 +2,23 @@ var API_SERVER = "/ext/hawk/";
 var API_KEY = "CED0F4070DC331E99237011E24C5045C";
 var API_PASSWORD = "BA287672587C4B0C6E52CD6F587CADC0";
 var API_LIST = {
-    blacklistInfo: [{
-        id: "insuranceCompanyKey",
-        name: "保险公司标识",
-        example: "ebd6d25b908209d546d46ef11951b11f"
-    }],
     blacklistStatus: [{
         id: "mdn",
         name: "中国电信手机号",
         example: "13505233543"
-    }],
-    closeRelationshipInfo: [{
-        id: "mdn",
-        name: "中国电信手机号",
-        example: "18106518081"
     }, {
-        id: "province",
-        name: "号码省份",
-        example: "BJ"
-    }, {
-        id: "month",
-        name: "查询月份",
-        example: "201510"
+        id: "insuranceCompanyKey",
+        name: "保险公司标识",
+        example: "ebd6d25b908209d546d46ef11951b11f"
     }],
     fraudScore: [{
         id: "mdn",
         name: "中国电信手机号",
         example: "18988843180"
-    },  {
-        id: "province",
-        name: "号码省份",
-        example: "BJ"
+    }, {
+        id: "insuranceCompanyKey",
+        name: "保险公司标识",
+        example: "ebd6d25b908209d546d46ef11951b11f"
     }, {
         id: "month",
         name: "查询月份",
@@ -42,10 +28,10 @@ var API_LIST = {
         id: "mdnList",
         name: "中国电信手机号列表",
         example: "18106518081,13357162168,13301405212"
-    },{
-        id: "province",
-        name: "号码省份",
-        example: "BJ"
+    }, {
+        id: "insuranceCompanyKey",
+        name: "保险公司标识",
+        example: "ebd6d25b908209d546d46ef11951b11f"
     }, {
         id: "month",
         name: "查询月份",
@@ -55,7 +41,7 @@ var API_LIST = {
         id: "mdn",
         name: "中国电信手机号",
         example: "18106518081"
-    },{
+    }, {
         id: "province",
         name: "号码省份",
         example: "BJ"

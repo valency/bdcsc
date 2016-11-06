@@ -11,9 +11,12 @@ function login() {
                 $.cookie("bdcsc-token", resp["data"]["token"], {expires: resp["data"]["validTime"]});
                 location.href = "demo.php";
             });
+        }).fail(function () {
+            bootbox.hideAll();
+            bootbox.alert(error_message("验证服务器没有响应，无法登录！"));
         });
     } else {
         bootbox.hideAll();
-        bootbox.alert("用户名或密码错误，请重新输入！");
+        bootbox.alert(error_message("用户名或密码错误，请重新输入！"));
     }
 }
