@@ -6,4 +6,9 @@
 .echart-half {
     width: 50%;
     height: 400px;
+    display: inline-block;
+}
+
+.echart-border-right {
+    background: url(../img/grey-line.png) right no-repeat;
 }

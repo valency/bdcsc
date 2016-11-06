@@ -68,26 +68,15 @@ function api_request() {
             break;
         case "gangDetectionInfo":
             v = "3\n1,2,0.082514\n1,3,0.000000\n2,3,0.000000\n0.082514";
-            result_pane.html("<div class='echart-half'></div><div class='echart-half'></div>");
-            // var header = ["号码 A", "号码 B", "成员间的关系密切度"];
-            // var html = "<table id='result-table' class='table table-striped table-hover'>";
-            // html += "<thead><tr>";
-            // for (i = 0; i < header.length; i++) {
-            //     html += "<th>" + header[i] + "</th>";
-            // }
-            // html += "</tr></thead><tbody>";
-            // var rows = v.split("\n");
-            // for (i = 0; i < rows.length - 1; i++) {
-            //     html += "<tr>";
-            //     var cols = rows[i].split(",");
-            //     for (var j = 0; j < cols.length; j++) {
-            //         html += "<td>" + cols[j] + "</td>";
-            //     }
-            //     html += "</tr>";
-            // }
-            // html += "</tbody></table>";
-            // result_pane.html("<pre>欺诈团伙的可能性评分：" + rows[rows.length - 1] + "</pre><hr/>" + html);
-            // $("#result-table").DataTable({language: DT_LANG});
+            vv = v.split("\n");
+            result_pane.html("<div class='echart-half echart-border-right'></div><div class='echart-half'></div>");
+            echarts.init($(".echart-half")[1]).setOption({
+                series: [{
+                    type: 'gauge',
+                    detail: {formatter: '{value}%'},
+                    data: [{name: "团伙欺诈评分", value: (parseFloat(vv[vv.length - 1]) * 100.0).toFixed(2)}]
+                }]
+            });
             break;
         case "fraudDetectionInfo":
             v = "false\n1\n定损员,1,3,2100.0";
