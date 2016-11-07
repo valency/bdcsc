@@ -37,80 +37,93 @@ function api_request() {
     }
     var result_pane = $("#div-result");
     result_pane.html(loading_message("载入中..."));
-    // $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + API_KEY + "/" + $.cookie("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
-    //     var v = resp["data"]["value"];
-    switch (api_id) {
-        case "blacklistStatus":
-            var v = "true\n车主,1,3,2100.0";
-            var vv = v.split("\n");
-            if (vv[0] == "true") {
-                vv[1] = vv[1].split(",");
-                var r = error_message("涉嫌欺诈");
-                r += "<ul>";
-                r += "<li><b>当前黑名单用户的理赔角色：</b>" + vv[1][0] + "</li>";
-                r += "<li><b>当前黑名单用户的持有保单数量：</b>" + vv[1][1] + "</li>";
-                r += "<li><b>当前黑名单用户的历史出险次数：</b>" + vv[1][2] + "</li>";
-                r += "<li><b>当前黑名单用户的历史赔付金额：</b>" + vv[1][3] + "</li>";
-                r += "</ul>";
-            } else r = success_message("没有涉嫌欺诈");
-            result_pane.html("<pre>" + r + "</pre>");
-            break;
-        case "fraudScore":
-            v = "0.165027";
-            result_pane.html("<pre><b>当前查询号码的欺诈可能性评分：</b>" + v + "</pre><div class='echart'></div>");
-            echarts.init($(".echart")[0]).setOption({
-                series: [{
-                    type: 'gauge',
-                    detail: {formatter: '{value}%'},
-                    data: [{name: "欺诈评分", value: (parseFloat(v) * 100.0).toFixed(2)}]
-                }]
-            });
-            break;
-        case "gangDetectionInfo":
-            v = "3\n1,2,0.082514\n1,3,0.000000\n2,3,0.000000\n0.082514";
-            vv = v.split("\n");
-            result_pane.html("<div class='echart-half echart-border-right'></div><div class='echart-half'></div>");
-            echarts.init($(".echart-half")[1]).setOption({
-                series: [{
-                    type: 'gauge',
-                    detail: {formatter: '{value}%'},
-                    data: [{name: "团伙欺诈评分", value: (parseFloat(vv[vv.length - 1]) * 100.0).toFixed(2)}]
-                }]
-            });
-            break;
-        case "fraudDetectionInfo":
-            v = "false\n1\n定损员,1,3,2100.0";
-            var rows = v.split("\n");
-            if (rows[0] == "true") {
-                result_pane.html("<pre>" + success_message("无欺诈倾向") + "</pre>");
-            } else {
-                var header = ["理赔角色", "持有保单数量", "历史出险次数", "历史赔付金额"];
-                var html = "<table id='result-table' class='table table-striped table-hover'>";
-                html += "<thead><tr>";
-                for (i = 0; i < header.length; i++) {
-                    html += "<th>" + header[i] + "</th>";
+    $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + API_KEY + "/" + $.cookie("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
+        var v = resp["data"]["value"];
+        switch (api_id) {
+            case "blacklistStatus":
+                // var v = "true\n车主,1,3,2100.0";
+                var vv = v.split("\n");
+                if (vv[0] == "true") {
+                    vv[1] = vv[1].split(",");
+                    var r = error_message("涉嫌欺诈");
+                    r += "<ul>";
+                    r += "<li><b>当前黑名单用户的理赔角色：</b>" + vv[1][0] + "</li>";
+                    r += "<li><b>当前黑名单用户的持有保单数量：</b>" + vv[1][1] + "</li>";
+                    r += "<li><b>当前黑名单用户的历史出险次数：</b>" + vv[1][2] + "</li>";
+                    r += "<li><b>当前黑名单用户的历史赔付金额：</b>" + vv[1][3] + "</li>";
+                    r += "</ul>";
+                } else r = success_message("没有涉嫌欺诈");
+                result_pane.html("<pre>" + r + "</pre>");
+                break;
+            case "fraudScore":
+                // v = "0.165027";
+                result_pane.html("<pre><b>当前查询号码的欺诈可能性评分：</b>" + v + "</pre><div class='echart'></div><div class='echart-legend'><img src='img/figure/legend.png'/></div>");
+                echarts.init($(".echart")[0]).setOption({
+                    series: [{
+                        type: 'gauge',
+                        detail: {formatter: '{value}%'},
+                        data: [{name: "欺诈评分", value: (parseFloat(v) * 100.0).toFixed(2)}]
+                    }]
+                });
+                break;
+            case "gangDetectionInfo":
+                // v = "3\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
+                // v = "2\n1,2,0.082514\n2,3,0.88\n0.082514";
+                // v = "4\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
+                vv = v.split("\n");
+                var n = parseInt(vv[0]);
+                var html = "<div class='echart-half echart-border-right'>";
+                for (i = 1; i <= Math.combination(n, 2); i++) {
+                    var c = parseFloat(vv[i].split(",")[2]);
+                    if (c <= 0.2) c = "green";
+                    else if (c <= 0.6) c = "blue";
+                    else c = "red";
+                    html += "<img src='img/figure/" + n + "/" + n + "_" + i + "_" + c + "_07.png'/>";
                 }
-                html += "</tr></thead><tbody>";
-                for (i = 2; i < rows.length; i++) {
-                    html += "<tr>";
-                    var cols = rows[i].split(",");
-                    for (var j = 0; j < cols.length; j++) {
-                        html += "<td>" + cols[j] + "</td>";
+                html += "<img src='img/figure/" + n + "/" + n + "_07.png'/>";
+                html += "</div><div class='echart-half'></div>";
+                result_pane.html(html);
+                echarts.init($(".echart-half")[1]).setOption({
+                    series: [{
+                        type: 'gauge',
+                        detail: {formatter: '{value}%'},
+                        data: [{name: "团伙欺诈评分", value: (parseFloat(vv[vv.length - 1]) * 100.0).toFixed(2)}]
+                    }]
+                });
+                break;
+            case "fraudDetectionInfo":
+                // v = "false\n1\n定损员,1,3,2100.0";
+                var rows = v.split("\n");
+                if (rows[0] == "true") {
+                    result_pane.html("<pre>" + success_message("无欺诈倾向") + "</pre>");
+                } else {
+                    var header = ["理赔角色", "持有保单数量", "历史出险次数", "历史赔付金额"];
+                    html = "<table id='result-table' class='table table-striped table-hover'>";
+                    html += "<thead><tr>";
+                    for (i = 0; i < header.length; i++) {
+                        html += "<th>" + header[i] + "</th>";
                     }
-                    html += "</tr>";
+                    html += "</tr></thead><tbody>";
+                    for (i = 2; i < rows.length; i++) {
+                        html += "<tr>";
+                        var cols = rows[i].split(",");
+                        for (var j = 0; j < cols.length; j++) {
+                            html += "<td>" + cols[j] + "</td>";
+                        }
+                        html += "</tr>";
+                    }
+                    html += "</tbody></table>";
+                    result_pane.html("<pre>" + error_message("存在欺诈倾向") + "\n<b>与所查询号码关系密切的黑名单用户数量：</b>" + rows[1] + "</pre><hr/>" + html);
+                    $("#result-table").DataTable({language: DT_LANG});
                 }
-                html += "</tbody></table>";
-                result_pane.html("<pre>" + error_message("存在欺诈倾向") + "\n<b>与所查询号码关系密切的黑名单用户数量：</b>" + rows[1] + "</pre><hr/>" + html);
-                $("#result-table").DataTable({language: DT_LANG});
-            }
-            break;
-        default:
-            result_pane.html("<pre>" + syntax_highlight(resp) + "</pre>");
-    }
-    // }).fail(function (resp) {
-    //     resp = eval("(" + resp["responseText"] + ")");
-    //     result_pane.html("<span class='text-danger'><strong>" + resp["code"] + "</strong> " + resp["message"] + "</span>");
-    // });
+                break;
+            default:
+                result_pane.html("<pre>" + syntax_highlight(resp) + "</pre>");
+        }
+    }).fail(function (resp) {
+        resp = eval("(" + resp["responseText"] + ")");
+        result_pane.html("<span class='text-danger'><strong>" + resp["code"] + "</strong> " + resp["message"] + "</span>");
+    });
 }
 
 function create_table_from_csv(csv, header) {

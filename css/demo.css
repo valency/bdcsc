@@ -1,14 +1,28 @@
 .echart {
-    width: 100%;
+    width: 70%;
     height: 400px;
+    display: inline-block;
+}
+
+.echart-legend {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 100px;
 }
 
 .echart-half {
     width: 50%;
     height: 400px;
     display: inline-block;
+    vertical-align: top;
+}
+
+.echart-half img {
+    position: absolute;
 }
 
 .echart-border-right {
     background: url(../img/grey-line.png) right no-repeat;
+    padding-top: 106px;
 }
