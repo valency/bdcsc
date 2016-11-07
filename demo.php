@@ -8,7 +8,7 @@
 <body>
 <?php include_once "header.php"; ?>
 <div class="container">
-    <div class="row" id="div-list">
+    <div class="row hidden" id="div-list">
         <div class="col-md-12">
             <select class="form-control" id="select-api">
                 <option class="api-group-0" value="blacklistStatus">黑名单建立和快速查询：查询黑名单状态</option>
@@ -18,7 +18,7 @@
             </select>
         </div>
     </div>
-    <hr/>
+    <hr class="hidden"/>
     <div class="well bs-component" id="div-form">
         <div class="row">
             <div class="col-md-12">

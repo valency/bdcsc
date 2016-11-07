@@ -42,9 +42,9 @@ var API_LIST = {
         name: "中国电信手机号",
         example: "18106518081"
     }, {
-        id: "province",
-        name: "号码省份",
-        example: "BJ"
+        id: "insuranceCompanyKey",
+        name: "保险公司标识",
+        example: "ebd6d25b908209d546d46ef11951b11f"
     }, {
         id: "month",
         name: "查询月份",

@@ -75,10 +75,12 @@ function api_request() {
                 var html = "<div class='echart-half echart-border-right'>";
                 for (i = 1; i <= Math.combination(n, 2); i++) {
                     var c = parseFloat(vv[i].split(",")[2]);
-                    if (c <= 0.2) c = "green";
-                    else if (c <= 0.6) c = "blue";
-                    else c = "red";
-                    html += "<img src='img/figure/" + n + "/" + n + "_" + i + "_" + c + "_07.png'/>";
+                    if (c > 0) {
+                        if (c <= 0.2) c = "green";
+                        else if (c <= 0.6) c = "blue";
+                        else c = "red";
+                        html += "<img src='img/figure/" + n + "/" + n + "_" + i + "_" + c + "_07.png'/>";
+                    }
                 }
                 html += "<img src='img/figure/" + n + "/" + n + "_07.png'/>";
                 html += "</div><div class='echart-half'></div>";
