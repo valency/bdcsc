@@ -94,9 +94,9 @@ function api_request() {
                 });
                 break;
             case "fraudDetectionInfo":
-                // v = "false\n1\n定损员,1,3,2100.0";
+                // v = "true\n1\n定损员,1,3,2100.0";
                 var rows = v.split("\n");
-                if (rows[0] == "true") {
+                if (rows[0] != "true") {
                     result_pane.html("<pre>" + success_message("无欺诈倾向") + "</pre>");
                 } else {
                     var header = ["理赔角色", "持有保单数量", "历史出险次数", "历史赔付金额"];
