@@ -4,7 +4,7 @@ var API_PASSWORD = "BA287672587C4B0C6E52CD6F587CADC0";
 var API_LIST = {
     blacklistStatus: [{
         id: "mdn",
-        name: "中国电信手机号",
+        name: "手机号",
         example: "13505233543"
     }, {
         id: "insuranceCompanyKey",
@@ -30,7 +30,7 @@ var API_LIST = {
     }],
     gangDetectionInfo: [{
         id: "mdnList",
-        name: "中国电信手机号列表",
+        name: "手机号列表",
         example: "18106518081,13357162168,13301405212"
     }, {
         id: "insuranceCompanyKey",
