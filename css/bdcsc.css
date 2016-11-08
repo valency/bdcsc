@@ -12,6 +12,10 @@ body {
     margin-bottom: 63px;
 }
 
+a {
+    text-decoration: none !important;
+}
+
 a:hover {
     text-decoration: none;
     background-color: white;
@@ -54,6 +58,5 @@ footer > p {
 
 .navbar-nav li a {
     padding-left: 50px;
-    padding-right: 50px;
     font-size: 16px;
 }

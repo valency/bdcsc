@@ -14,7 +14,11 @@ var API_LIST = {
     fraudScore: [{
         id: "mdn",
         name: "中国电信手机号",
-        example: "18988843180"
+        example: "18988843180",
+        verify: function (m) {
+            var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
+            return pattern.test(m);
+        }
     }, {
         id: "insuranceCompanyKey",
         name: "保险公司标识",
@@ -40,7 +44,11 @@ var API_LIST = {
     fraudDetectionInfo: [{
         id: "mdn",
         name: "中国电信手机号",
-        example: "18106518081"
+        example: "18106518081",
+        verify: function (m) {
+            var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
+            return pattern.test(m);
+        }
     }, {
         id: "insuranceCompanyKey",
         name: "保险公司标识",

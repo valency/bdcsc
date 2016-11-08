@@ -33,7 +33,17 @@ function api_request() {
     var params = API_LIST[api_id];
     var m = [];
     for (var i = 0; i < params.length; i++) {
-        m.push(params[i]["id"] + "=" + $("#input-" + params[i]["id"]).val());
+        var container = $("#input-" + params[i]["id"]).parent().parent();
+        var value = $("#input-" + params[i]["id"]).val();
+        if (params[i]["verify"] != null) {
+            if (!params[i]["verify"](value)) {
+                container.addClass("has-error");
+                return null;
+            } else {
+                container.removeClass("has-error");
+                m.push(params[i]["id"] + "=" + value);
+            }
+        }
     }
     var result_pane = $("#div-result");
     result_pane.html(loading_message("载入中..."));
@@ -57,11 +67,11 @@ function api_request() {
                 break;
             case "fraudScore":
                 // v = "0.165027";
-                result_pane.html("<pre><b>当前查询号码的欺诈可能性评分：</b>" + v + "</pre><div class='echart'></div><div class='echart-legend'><img src='img/figure/legend.png'/></div>");
+                result_pane.html("<div class='echart'></div><div class='echart-legend'><img src='img/figure/legend.png'/></div>");
                 echarts.init($(".echart")[0]).setOption({
                     series: [{
                         type: 'gauge',
-                        detail: {formatter: '{value}%'},
+                        detail: {formatter: '{value}'},
                         data: [{name: "欺诈评分", value: (parseFloat(v) * 100.0).toFixed(2)}]
                     }]
                 });
