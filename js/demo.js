@@ -35,14 +35,12 @@ function api_request() {
     for (var i = 0; i < params.length; i++) {
         var container = $("#input-" + params[i]["id"]).parent().parent();
         var value = $("#input-" + params[i]["id"]).val();
-        if (params[i]["verify"] != null) {
-            if (!params[i]["verify"](value)) {
-                container.addClass("has-error");
-                return null;
-            } else {
-                container.removeClass("has-error");
-                m.push(params[i]["id"] + "=" + value);
-            }
+        if (params[i]["verify"] != null && !params[i]["verify"](value)) {
+            container.addClass("has-error");
+            return null;
+        } else {
+            container.removeClass("has-error");
+            m.push(params[i]["id"] + "=" + value);
         }
     }
     var result_pane = $("#div-result");
