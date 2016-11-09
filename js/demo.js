@@ -50,18 +50,17 @@ function api_request() {
         switch (api_id) {
             case "blacklistStatus":
                 // var v = "true\n车主,1,3,2100.0";
-                var vv = v.split("\n");
+                var vv = v.split(";");
                 if (vv[0] == "true") {
                     vv[1] = vv[1].split(",");
-                    var r = error_message("涉嫌欺诈");
-                    r += "<ul>";
-                    r += "<li><b>当前黑名单用户的理赔角色：</b>" + vv[1][0] + "</li>";
-                    r += "<li><b>当前黑名单用户的持有保单数量：</b>" + vv[1][1] + "</li>";
-                    r += "<li><b>当前黑名单用户的历史出险次数：</b>" + vv[1][2] + "</li>";
-                    r += "<li><b>当前黑名单用户的历史赔付金额：</b>" + vv[1][3] + "</li>";
-                    r += "</ul>";
-                } else r = success_message("没有涉嫌欺诈");
-                result_pane.html("<pre>" + r + "</pre>");
+                    var html = "<div class='blacklist-status'>";
+                    html += "<p>当前黑名单用户的理赔角色：" + vv[1][0] + "</p>";
+                    html += "<p>当前黑名单用户的持有保单数量：" + vv[1][1] + "</p>";
+                    html += "<p>当前黑名单用户的历史出险次数：" + vv[1][2] + "</p>";
+                    html += "<p>当前黑名单用户的历史赔付金额：" + vv[1][3] + "</p>";
+                    html += "</div>";
+                } else html = "<pre>" + success_message("没有涉嫌欺诈") + "</pre>";
+                result_pane.html(html);
                 break;
             case "fraudScore":
                 // v = "0.165027";
@@ -78,9 +77,9 @@ function api_request() {
                 // v = "3\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
                 // v = "2\n1,2,0.082514\n2,3,0.88\n0.082514";
                 // v = "4\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
-                vv = v.split("\n");
+                vv = v.split(";");
                 var n = parseInt(vv[0]);
-                var html = "<div class='echart-half echart-border-right'>";
+                html = "<div class='echart-half echart-border-right'>";
                 for (i = 1; i <= Math.combination(n, 2); i++) {
                     var c = parseFloat(vv[i].split(",")[2]);
                     if (c > 0) {
@@ -103,7 +102,7 @@ function api_request() {
                 break;
             case "fraudDetectionInfo":
                 // v = "true\n1\n定损员,1,3,2100.0";
-                var rows = v.split("\n");
+                var rows = v.split(";");
                 if (rows[0] != "true") {
                     result_pane.html("<pre>" + success_message("无欺诈倾向") + "</pre>");
                 } else {
