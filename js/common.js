@@ -61,3 +61,8 @@ function syntax_highlight(json) {
         return '<span class="' + cls + '">' + match + '</span>';
     });
 }
+
+function convert_django_time(t) {
+    if (t != null) return t.substring(0, 19).replace("T", " ");
+    else return null;
+}

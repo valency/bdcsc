@@ -1,11 +1,18 @@
+var FRANZ_SERVER = "/api/franz/";
 var API_SERVER = "/ext/hawk/";
-var API_KEY = "CED0F4070DC331E99237011E24C5045C";
-var API_PASSWORD = "BA287672587C4B0C6E52CD6F587CADC0";
+var API_KEYS = [{
+    key: "CED0F4070DC331E99237011E24C5045C",
+    pwd: "BA287672587C4B0C6E52CD6F587CADC0"
+}];
 var API_LIST = {
     blacklistStatus: [{
         id: "mdn",
         name: "手机号",
-        example: "13505233543"
+        example: "13505233543",
+        verify: function (m) {
+            var pattern = /^(?:13[0-9]|15[0-9]|14[0-9]|17[0-9]|18[0-9])-?\d{5}(\d{3}|\*{3})$/;
+            return pattern.test(m);
+        }
     }, {
         id: "insuranceCompanyKey",
         name: "保险公司标识",
@@ -31,7 +38,15 @@ var API_LIST = {
     gangDetectionInfo: [{
         id: "mdnList",
         name: "手机号列表",
-        example: "18106518081,13357162168,13301405212"
+        example: "18106518081,13357162168,13301405212",
+        verify: function (m) {
+            var pattern = /^(?:13[0-9]|15[0-9]|14[0-9]|17[0-9]|18[0-9])-?\d{5}(\d{3}|\*{3})$/;
+            var mdns = m.split(",");
+            for (var i = 0; i < mdns.length; i++) {
+                if (!pattern.test(mdns[i])) return false;
+            }
+            return true;
+        }
     }, {
         id: "insuranceCompanyKey",
         name: "保险公司标识",

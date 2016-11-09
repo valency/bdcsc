@@ -45,7 +45,7 @@ function api_request() {
     }
     var result_pane = $("#div-result");
     result_pane.html(loading_message("载入中..."));
-    $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + API_KEY + "/" + $.cookie("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
+    $.get(API_SERVER + "hawk/hawk-service/" + api_id + "/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
         var v = resp["data"]["value"];
         switch (api_id) {
             case "blacklistStatus":
@@ -96,7 +96,7 @@ function api_request() {
                 echarts.init($(".echart-half")[1]).setOption({
                     series: [{
                         type: 'gauge',
-                        detail: {formatter: '{value}%'},
+                        detail: {formatter: '{value}'},
                         data: [{name: "团伙欺诈评分", value: (parseFloat(vv[vv.length - 1]) * 100.0).toFixed(2)}]
                     }]
                 });
