@@ -7,7 +7,6 @@
     <script type="text/javascript" src="lib/jquery-file-upload-9.10.4/js/jquery.fileupload.js"></script>
     <script type="text/javascript" src="lib/jquery-file-upload-9.10.4/js/jquery.fileupload-process.js"></script>
     <script type="text/javascript" src="lib/jquery-file-upload-9.10.4/js/jquery.fileupload-validate.js"></script>
-<!--    <script type="text/javascript" src="lib/jquery-file-upload-9.10.4/js/jquery.fileupload-ui.js"></script>-->
     <script type="text/javascript" src="js/file.js"></script>
 </head>
 <body>
