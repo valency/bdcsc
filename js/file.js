@@ -2,11 +2,11 @@ $(document).ready(function () {
     auth_check();
     $("#menu-4").addClass("active");
     $('#file-upload').fileupload({
-        dataType: 'json',
-        acceptFileTypes: '/(\.|\/)(csv|txt)$/i',
+        acceptFileTypes: /(\.|\/)(csv)$/i,
+        maxFileSize: 2000,
         done: function (e, data) {
             setTimeout(function () {
-                window.location.reload();
+                location.reload();
             }, 1000);
         },
         submit: function (e, data) {
@@ -18,6 +18,9 @@ $(document).ready(function () {
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);
             $(".progress-bar").css('width', progress + '%');
+        },
+        processfail: function (e, data) {
+            bootbox.alert("<p>" + error_message("以下文件上传失败：") + "</p><pre>" + data.files[data.index].name + "</pre><p>" + error_message("错误原因：") + "</p><pre>" + data.files[data.index].error + "</pre>");
         }
     });
     $("#table-files").DataTable({language: DT_LANG, stateSave: true});

@@ -75,18 +75,17 @@ function api_request() {
                 break;
             case "gangDetectionInfo":
                 // v = "3\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
-                // v = "2\n1,2,0.082514\n2,3,0.88\n0.082514";
-                // v = "4\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
+                // v = "3;true;true;true;A,B,0.082514;A,C,0.000000;B,C,0.000000;0.082514";
                 vv = v.split(";");
                 var n = parseInt(vv[0]);
                 html = "<div class='echart-half echart-border-right'>";
-                for (i = 1; i <= Math.combination(n, 2); i++) {
+                for (i = n + 1; i <= n + Math.combination(n, 2); i++) {
                     var c = parseFloat(vv[i].split(",")[2]);
                     if (c > 0) {
                         if (c <= 0.2) c = "green";
                         else if (c <= 0.6) c = "blue";
                         else c = "red";
-                        html += "<img src='img/figure/" + n + "/" + n + "_" + i + "_" + c + "_07.png'/>";
+                        html += "<img src='img/figure/" + n + "/" + n + "_" + (i - n) + "_" + c + "_07.png'/>";
                     }
                 }
                 html += "<img src='img/figure/" + n + "/" + n + "_07.png'/>";
