@@ -58,6 +58,4 @@ function send_file(file) {
             bootbox.alert(error_message("传输数据失败！"));
         });
     });
-
-
 }

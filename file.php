@@ -16,6 +16,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div>
                 <button class="btn btn-primary" type="button" onclick="$('#file-upload').click();">上传文件</button>
+                <a href="data/template.csv" target="_blank" class="btn btn-primary" type="button">下载模板</a>
                 <input id="file-upload" class="hidden" type="file" name="files[]" data-url="./data/" multiple/>
             </div>
             <hr/>
@@ -31,7 +32,7 @@
                 <tbody>
                 <?php if ($handle = opendir('./data/')) {
                     while (false !== ($entry = readdir($handle))) {
-                        if (!is_dir('./data/' . $entry) && pathinfo($entry, PATHINFO_EXTENSION) != "php") {
+                        if (!is_dir('./data/' . $entry) && pathinfo($entry, PATHINFO_EXTENSION) != "php" && $entry != "template.csv") {
                             echo "<tr>";
                             echo "<td><a href='data/" . $entry . "' target='_blank'><i class='fa fa-file-o'></i> " . $entry . "</a></td>";
                             echo "<td>" . date("Y-m-d H:i:s", filemtime('./data/' . $entry)) . "</td>";
