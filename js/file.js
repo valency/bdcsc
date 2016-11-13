@@ -42,10 +42,22 @@ function delete_file(file) {
 }
 
 function send_file(file) {
+    var ic_key = "ebd6d25b908209d546d46ef11951b11f";
     bootbox.dialog({
         message: loading_message("载入中..."),
         closeButton: false
     });
-    bootbox.hideAll();
-    bootbox.alert(success_message("传输数据成功！"));
+    $.get("data/" + file, function (resp) {
+        resp = resp.replace(/\r/g, "");
+        resp = resp.replace(/\n/g, "%3B");
+        $.get(API_SERVER + "hawk/hawk-service/_setBlacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json?insuranceCompanyKey=" + ic_key + "&blacklist=" + resp, function (resp) {
+            bootbox.hideAll();
+            bootbox.alert(success_message("传输数据成功！"));
+        }).fail(function (resp) {
+            bootbox.hideAll();
+            bootbox.alert(error_message("传输数据失败！"));
+        });
+    });
+
+
 }
