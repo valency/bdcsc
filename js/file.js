@@ -47,15 +47,26 @@ function send_file(file) {
         message: loading_message("载入中..."),
         closeButton: false
     });
-    $.get("data/" + file, function (resp) {
-        resp = resp.replace(/\r/g, "");
-        resp = resp.replace(/\n/g, "%3B");
-        $.get(API_SERVER + "hawk/hawk-service/_setBlacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json?insuranceCompanyKey=" + ic_key + "&blacklist=" + resp, function (resp) {
-            bootbox.hideAll();
-            bootbox.alert(success_message("传输数据成功！"));
-        }).fail(function (resp) {
-            bootbox.hideAll();
-            bootbox.alert(error_message("传输数据失败！"));
+    $.get("data/" + file, function (content) {
+        // resp = resp.replace(/\r/g, "");
+        // resp = resp.replace(/\n/g, "%3B");
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: API_SERVER + "hawk/hawk-service/blacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json",
+            data: {
+                insuranceCompanyKey: ic_key,
+                blacklist: content
+            },
+            complete: function (xhr, ajaxOptions, thrownError) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    bootbox.hideAll();
+                    bootbox.alert(success_message("传输数据成功！"));
+                } else {
+                    bootbox.hideAll();
+                    bootbox.alert(error_message("传输数据失败！"));
+                }
+            }
         });
     });
 }

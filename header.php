@@ -15,8 +15,14 @@
                 <li id="menu-1"><a href="demo.php?f=1">深度欺诈检测</a></li>
                 <li id="menu-2"><a href="demo.php?f=2">团伙欺诈检测</a></li>
                 <li id="menu-3"><a href="demo.php?f=3">欺诈调查指导</a></li>
-                <li id="menu-4"><a href="file.php">黑名单管理</a></li>
-                <li id="menu-5" class="hidden menu-admin"><a href="user.php">用户管理</a></li>
+                <li id="menu-4" class="dropdown hidden menu-admin">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">系统管理 <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="file.php">黑名单管理</a></li>
+                        <li><a href="company.php">保险公司管理</a></li>
+                        <li><a href="user.php">用户管理</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">

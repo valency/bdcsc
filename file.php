@@ -39,7 +39,7 @@
                             echo "<td>" . number_format(filesize('./data/' . $entry)) . "</td>";
                             echo "<td>";
                             echo "<a href=\"javascript:send_file('" . $entry . "')\" class='btn btn-xs btn-primary'><i class='fa fa-send'></i> 加载</a> ";
-                            echo "<a href=\"javascript:delete_file('" . $entry . "')\" class='btn btn-xs btn-primary'><i class='fa fa-trash'></i> 删除</a>";
+                            echo "<a href=\"javascript:delete_file('" . $entry . "')\" class='btn btn-xs btn-danger'><i class='fa fa-trash'></i> 删除</a>";
                             echo "</td>";
                             echo "</tr>";
                         }

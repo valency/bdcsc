@@ -1,9 +1,9 @@
 var FRANZ_SERVER = "/api/franz/";
 var API_SERVER = "/ext/hawk/";
-var API_KEYS = [{
-    key: "CED0F4070DC331E99237011E24C5045C",
-    pwd: "BA287672587C4B0C6E52CD6F587CADC0"
-}];
+// var API_KEYS = [{
+//     key: "CED0F4070DC331E99237011E24C5045C",
+//     pwd: "BA287672587C4B0C6E52CD6F587CADC0"
+// }];
 var API_LIST = {
     blacklistStatus: [{
         id: "mdn",
