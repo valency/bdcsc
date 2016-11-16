@@ -21,6 +21,7 @@
                         <li><a href="file.php">黑名单管理</a></li>
                         <li><a href="company.php">保险公司管理</a></li>
                         <li><a href="user.php">用户管理</a></li>
+                        <li><a href="log.php">日志管理</a></li>
                     </ul>
                 </li>
             </ul>
