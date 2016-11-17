@@ -9,10 +9,6 @@ var API_LIST = {
             var pattern = /^(?:13[0-9]|15[0-9]|14[0-9]|17[0-9]|18[0-9])-?\d{5}(\d{3}|\*{3})$/;
             return pattern.test(m);
         }
-    }, {
-        id: "insuranceCompanyKey",
-        name: "保险公司标识",
-        example: "ebd6d25b908209d546d46ef11951b11f"
     }],
     fraudScore: [{
         id: "mdn",
@@ -22,10 +18,6 @@ var API_LIST = {
             var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
             return pattern.test(m);
         }
-    }, {
-        id: "insuranceCompanyKey",
-        name: "保险公司标识",
-        example: "ebd6d25b908209d546d46ef11951b11f"
     }, {
         id: "month",
         name: "查询月份",
@@ -44,10 +36,6 @@ var API_LIST = {
             return true;
         }
     }, {
-        id: "insuranceCompanyKey",
-        name: "保险公司标识",
-        example: "ebd6d25b908209d546d46ef11951b11f"
-    }, {
         id: "month",
         name: "查询月份",
         example: "201510"
@@ -60,10 +48,6 @@ var API_LIST = {
             var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
             return pattern.test(m);
         }
-    }, {
-        id: "insuranceCompanyKey",
-        name: "保险公司标识",
-        example: "ebd6d25b908209d546d46ef11951b11f"
     }, {
         id: "month",
         name: "查询月份",

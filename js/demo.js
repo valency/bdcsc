@@ -1,5 +1,12 @@
+var INSURANCE_COMPANY_KEY = null;
+
 $(document).ready(function () {
-    auth_check();
+    auth_check(function (resp) {
+        $.get(FRANZ_SERVER + "auth/info-lib/?id=" + resp["misc"]["bdcsc_company"], function (resp) {
+            var info = eval("(" + resp["info"] + ")");
+            INSURANCE_COMPANY_KEY = info["code"];
+        });
+    });
     var p = get_url_parameter("f");
     if (p == undefined || p == null || p == "") p = 0;
     else p = parseInt(p);
@@ -31,7 +38,7 @@ function api_switch() {
 function api_request() {
     var api_id = $("#select-api").val();
     var params = API_LIST[api_id];
-    var m = [];
+    var m = ["insuranceCompanyKey=" + INSURANCE_COMPANY_KEY];
     for (var i = 0; i < params.length; i++) {
         var container = $("#input-" + params[i]["id"]).parent().parent();
         var value = $("#input-" + params[i]["id"]).val();
@@ -64,7 +71,7 @@ function api_request() {
                 break;
             case "fraudScore":
                 // v = "0.165027";
-                result_pane.html("<div class='echart'></div><div class='echart-legend'><img src='img/figure/legend.png'/></div>");
+                result_pane.html("<div class='echart'></div><div class='echart-legend'><img src='img/figure/fraud_score/legend.png'/></div>");
                 echarts.init($(".echart")[0]).setOption({
                     series: [{
                         type: 'gauge',

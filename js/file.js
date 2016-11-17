@@ -1,5 +1,12 @@
+var INSURANCE_COMPANY_KEY = null;
+
 $(document).ready(function () {
-    auth_check();
+    auth_check(function (resp) {
+        $.get(FRANZ_SERVER + "auth/info-lib/?id=" + resp["misc"]["bdcsc_company"], function (resp) {
+            var info = eval("(" + resp["info"] + ")");
+            INSURANCE_COMPANY_KEY = info["code"];
+        });
+    });
     $("#menu-4").addClass("active");
     $('#file-upload').fileupload({
         acceptFileTypes: /(\.|\/)(csv)$/i,
@@ -42,20 +49,17 @@ function delete_file(file) {
 }
 
 function send_file(file) {
-    var ic_key = "ebd6d25b908209d546d46ef11951b11f";
     bootbox.dialog({
         message: loading_message("载入中..."),
         closeButton: false
     });
     $.get("data/" + file, function (content) {
-        // resp = resp.replace(/\r/g, "");
-        // resp = resp.replace(/\n/g, "%3B");
         $.ajax({
             type: "POST",
             dataType: "json",
             url: API_SERVER + "hawk/hawk-service/blacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json",
             data: {
-                insuranceCompanyKey: ic_key,
+                insuranceCompanyKey: INSURANCE_COMPANY_KEY,
                 blacklist: content
             },
             complete: function (xhr, ajaxOptions, thrownError) {
