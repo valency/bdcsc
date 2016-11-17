@@ -7,9 +7,15 @@ $(document).ready(function () {
     });
     $.get(FRANZ_SERVER + "auth/log/?app=bdcsc", function (resp) {
         for (var i = 0; i < resp.length; i++) {
-            // var company = companies[i];
-            // company["info"] = eval("(" + company["info"] + ")");
-            // COMPANIES.push(company);
+            var log = resp[i];
+            var html = "<tr>";
+            html += "<td>" + log["account"] + "</td>";
+            html += "<td>" + convert_django_time(log["t"]) + "</td>";
+            html += "<td>" + log["type"] + "</td>";
+            // html += "<td>" + log["request"] + "</td>";
+            html += "<td>" + log["response"] + "</td>";
+            html += "</tr>";
+            $("#table-logs tbody").append(html);
         }
         $("#table-logs").DataTable({language: DT_LANG});
         bootbox.hideAll();

@@ -131,6 +131,8 @@ function api_request() {
     }).fail(function (resp) {
         resp = eval("(" + resp["responseText"] + ")");
         result_pane.html("<span class='text-danger'><strong>" + resp["code"] + "</strong> " + resp["message"] + "</span>");
+    }).always(function (resp) {
+        api_logging(api_id, m.join("&"), resp["code"]);
     });
 }
 
