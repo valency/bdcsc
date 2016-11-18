@@ -12,7 +12,7 @@ $(document).ready(function () {
             html += "<td>" + log["account"] + "</td>";
             html += "<td>" + convert_django_time(log["t"]) + "</td>";
             html += "<td>" + log["type"] + "</td>";
-            // html += "<td>" + log["request"] + "</td>";
+            html += "<td>" + log["request"].replace(/&/g, "<br/>").replace(/=/g, " = ") + "</td>";
             html += "<td>" + log["response"] + "</td>";
             html += "</tr>";
             $("#table-logs tbody").append(html);
