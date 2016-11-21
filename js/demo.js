@@ -75,8 +75,9 @@ function api_request() {
                 echarts.init($(".echart")[0]).setOption({
                     series: [{
                         type: 'gauge',
+                        max: 1000,
                         detail: {formatter: '{value}'},
-                        data: [{name: "黑名单评分", value: (parseFloat(v) * 100.0).toFixed(2)}]
+                        data: [{name: "黑名单评分", value: parseInt(v)}]
                     }]
                 });
                 break;
@@ -99,13 +100,14 @@ function api_request() {
                 }
                 html += "<img src='img/figure/gang-detection-info/legend.png'/>";
                 html += "</div><div class='echart-half'></div>";
-                html+="<p class='text-center'>* 用户 A 对应输入的第一个电话号码，用户 B 对应输入的第二个号码，依次类推。非电信手机号码用灰色标出。</p>";
+                html += "<p class='text-center'>* 用户 A 对应输入的第一个电话号码，用户 B 对应输入的第二个号码，依次类推。非电信手机号码用灰色标出。</p>";
                 result_pane.html(html);
                 echarts.init($(".echart-half")[1]).setOption({
                     series: [{
                         type: 'gauge',
+                        max: 1000,
                         detail: {formatter: '{value}'},
-                        data: [{name: "团伙黑名单评分", value: (parseFloat(vv[vv.length - 1]) * 100.0).toFixed(2)}]
+                        data: [{name: "团伙黑名单评分", value: parseInt(vv[vv.length - 1])}]
                     }]
                 });
                 break;
