@@ -7,7 +7,7 @@ $(document).ready(function () {
             INSURANCE_COMPANY_KEY = info["code"];
         });
     });
-    $("#menu-4").addClass("active");
+    $("#menu-5").addClass("active");
     $('#file-upload').fileupload({
         acceptFileTypes: /(\.|\/)(csv)$/i,
         maxFileSize: 2000,
