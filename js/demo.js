@@ -81,22 +81,25 @@ function api_request() {
                 });
                 break;
             case "gangDetectionInfo":
-                // v = "3\n1,2,0.082514\n1,3,0.55\n2,3,0.88\n0.082514";
                 // v = "3;true;true;true;A,B,0.082514;A,C,0.000000;B,C,0.000000;0.082514";
                 vv = v.split(";");
-                var n = parseInt(vv[0]);
                 html = "<div class='echart-half echart-border-right'>";
+                var n = parseInt(vv[0]);
                 for (i = n + 1; i <= n + Math.combination(n, 2); i++) {
                     var c = parseFloat(vv[i].split(",")[2]);
                     if (c > 0) {
                         if (c <= 0.2) c = "green";
                         else if (c <= 0.6) c = "blue";
                         else c = "red";
-                        html += "<img src='img/figure/" + n + "/" + n + "_" + (i - n) + "_" + c + "_07.png'/>";
+                        html += "<img src='img/figure/gang-detection-info/" + n + "/" + n + "_" + (i - n) + "_" + c + "_07.png'/>";
                     }
                 }
-                html += "<img src='img/figure/" + n + "/" + n + "_07.png'/>";
+                for (i = 1; i < n + 1; i++) {
+                    html += "<img src='img/figure/gang-detection-info/" + vv[i] + "/" + n + "-" + (i - 1) + "_07.png'/>";
+                }
+                html += "<img src='img/figure/gang-detection-info/legend.png'/>";
                 html += "</div><div class='echart-half'></div>";
+                html+="<p class='text-center'>* 用户 A 对应输入的第一个电话号码，用户 B 对应输入的第二个号码，依次类推。非电信手机号码用灰色标出。</p>";
                 result_pane.html(html);
                 echarts.init($(".echart-half")[1]).setOption({
                     series: [{
