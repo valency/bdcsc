@@ -77,7 +77,7 @@ function api_request() {
                         type: 'gauge',
                         max: 1000,
                         detail: {formatter: '{value}'},
-                        data: [{name: "黑名单评分", value: parseInt(v)}]
+                        data: [{name: "欺诈评分", value: parseInt(v)}]
                     }]
                 });
                 break;
