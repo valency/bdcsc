@@ -107,7 +107,7 @@ function api_request() {
                         type: 'gauge',
                         max: 1000,
                         detail: {formatter: '{value}'},
-                        data: [{name: "团伙黑名单评分", value: parseInt(vv[vv.length - 1])}]
+                        data: [{name: "团伙欺诈评分", value: parseInt(vv[vv.length - 1])}]
                     }]
                 });
                 break;
@@ -115,7 +115,7 @@ function api_request() {
                 // v = "true\n1\n定损员,1,3,2100.0";
                 var rows = v.split(";");
                 if (rows[0] != "true") {
-                    result_pane.html("<pre>" + success_message("该用户不在黑名单列表中") + "</pre>");
+                    result_pane.html("<pre><b>与所查询号码关系密切的黑名单用户数量：</b>0</pre><hr/>" + html);
                 } else {
                     var header = ["理赔角色", "持有保单数量", "历史出险次数", "历史赔付金额"];
                     html = "<table id='result-table' class='table table-striped table-hover'>";
@@ -133,7 +133,7 @@ function api_request() {
                         html += "</tr>";
                     }
                     html += "</tbody></table>";
-                    result_pane.html("<pre>" + error_message("该用户在黑名单列表中") + "\n<b>与所查询号码关系密切的黑名单用户数量：</b>" + rows[1] + "</pre><hr/>" + html);
+                    result_pane.html("<pre><b>与所查询号码关系密切的黑名单用户数量：</b>" + rows[1] + "</pre><hr/>" + html);
                     $("#result-table").DataTable({language: DT_LANG});
                 }
                 break;
