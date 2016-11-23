@@ -41,7 +41,7 @@ function login() {
                     });
                 } else {
                     bootbox.hideAll();
-                    bootbox.alert(error_message("无法登录：该用户禁止访问本系统！"));
+                    bootbox.alert(error_message("无法登录：该用户没有所属的保险公司，无法访问本系统！"));
                 }
             });
         },
@@ -50,8 +50,11 @@ function login() {
                 case 401:
                     var error_msg = "无法登录：用户名或密码错误！";
                     break;
+                case 403:
+                    error_msg = "无法登录：该用户禁止访问本系统！";
+                    break;
                 case 406:
-                    error_msg = "无法登录：用户名或密码错误！";
+                    error_msg = "无法登录：用户名或密码不符合规范！";
                     break;
                 default:
                     error_msg = "无法登录：验证服务器无响应！";

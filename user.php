@@ -20,6 +20,7 @@
                     <th>保险公司</th>
                     <th>注册时间</th>
                     <th>最近登录时间</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

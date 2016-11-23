@@ -29,6 +29,9 @@ $(document).ready(function () {
                 html += "<td>" + company + "</td>";
                 html += "<td>" + convert_django_time(user["register_time"]) + "</td>";
                 html += "<td>" + convert_django_time(user["last_login"]) + "</td>";
+                var ban_btn = "<button class='btn btn-xs btn-danger' onclick=\"ban_user('" + user["username"] + "','True');\"><i class='fa fa-ban'></i> 注销</button>";
+                if (user["banned"]) ban_btn = "<button class='btn btn-xs btn-success' onclick=\"ban_user('" + user["username"] + "','False');\"><i class='fa fa-undo'></i> 取消注销</button>";
+                html += "<td>" + ban_btn + "</td>";
                 html += "</tr>";
                 $("#table-users tbody").append(html);
             }
@@ -37,6 +40,36 @@ $(document).ready(function () {
         });
     });
 });
+
+function ban_user(username, banned) {
+    bootbox.dialog({
+        message: loading_message("载入中..."),
+        closeButton: false
+    });
+    $.ajax({
+        type: "PUT",
+        dataType: "json",
+        url: FRANZ_SERVER + "auth/admin/modify-user/",
+        data: {
+            username: username,
+            field: "banned",
+            value: banned
+        },
+        complete: function (xhr, ajaxOptions, thrownError) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                bootbox.hideAll();
+                bootbox.alert(success_message("注销 / 取消注销账户成功！"), function () {
+                    location.reload();
+                });
+            } else {
+                bootbox.hideAll();
+                bootbox.alert(error_message("注销 / 取消注销账户失败！"), function () {
+                    location.reload();
+                });
+            }
+        }
+    });
+}
 
 function register() {
     bootbox.dialog({
