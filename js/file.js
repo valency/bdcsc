@@ -57,7 +57,7 @@ function send_file(file) {
         $.ajax({
             type: "POST",
             dataType: "json",
-            url: API_SERVER + "hawk/hawk-service/blacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json",
+            url: API_SERVER + "rp-label/grade/blacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json",
             data: {
                 insuranceCompanyKey: INSURANCE_COMPANY_KEY,
                 blacklist: content
