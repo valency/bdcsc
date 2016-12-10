@@ -52,7 +52,7 @@ function api_request() {
     }
     var result_pane = $("#div-result");
     result_pane.html(loading_message("载入中..."));
-    $.get(API_SERVER + "rp-label/grade/" + api_id + "/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
+    $.get(API_SERVER + "rp-label/antifraud/" + api_id + "/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json?" + m.join("&"), function (resp) {
         var v = resp["data"]["value"];
         switch (api_id) {
             case "blacklistStatus":
