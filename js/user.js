@@ -35,7 +35,14 @@ $(document).ready(function () {
                 html += "</tr>";
                 $("#table-users tbody").append(html);
             }
-            $("#table-users").DataTable({language: DT_LANG});
+            $("#table-users").DataTable({
+                language: DT_LANG,
+                stateSave: true,
+                columnDefs: [{
+                    orderable: false,
+                    targets: 4
+                }]
+            });
             bootbox.hideAll();
         });
     });

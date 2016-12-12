@@ -18,7 +18,14 @@ $(document).ready(function () {
             html += "</tr>";
             $("#table-companies tbody").append(html);
         }
-        $("#table-companies").DataTable({language: DT_LANG});
+        $("#table-companies").DataTable({
+            language: DT_LANG,
+            stateSave: true,
+            columnDefs: [{
+                orderable: false,
+                targets: 4
+            }]
+        });
         bootbox.hideAll();
     });
 });

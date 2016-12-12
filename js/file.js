@@ -30,7 +30,14 @@ $(document).ready(function () {
             bootbox.alert("<p>" + error_message("以下文件上传失败：") + "</p><pre>" + data.files[data.index].name + "</pre><p>" + error_message("错误原因：") + "</p><pre>" + data.files[data.index].error + "</pre>");
         }
     });
-    $("#table-files").DataTable({language: DT_LANG, stateSave: true});
+    $("#table-files").DataTable({
+        language: DT_LANG,
+        stateSave: true,
+        columnDefs: [{
+            orderable: false,
+            targets: 3
+        }]
+    });
 });
 
 function delete_file(file) {
