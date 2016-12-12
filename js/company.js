@@ -58,35 +58,46 @@ function company_add() {
                     message: loading_message("载入中..."),
                     closeButton: false
                 });
-                var info = {
-                    name: $("#company-add-name").val(),
-                    code: $("#company-add-code").val(),
-                    key: $("#company-add-key").val(),
-                    secret: $("#company-add-secret").val()
-                };
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: FRANZ_SERVER + "auth/info-lib/",
-                    data: {
-                        app: "bdcsc",
-                        name: "company",
-                        info: JSON.stringify(info)
-                    },
-                    complete: function (xhr, ajaxOptions, thrownError) {
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            bootbox.hideAll();
-                            bootbox.alert(success_message("新增保险公司成功！"), function () {
-                                location.reload();
-                            });
-                        } else {
-                            bootbox.hideAll();
-                            bootbox.alert(error_message("新增保险公司失败！"), function () {
-                                location.reload();
-                            });
+                var company_name = $("#company-add-name").val();
+                var company_code = $("#company-add-code").val();
+                var company_key = $("#company-add-key").val();
+                var company_secret = $("#company-add-secret").val();
+                if (is_empty(company_name) || is_empty(company_code) || is_empty(company_key) || is_empty(company_secret)) {
+                    bootbox.hideAll();
+                    bootbox.alert(error_message("新增保险公司失败，任何信息都不能为空！"), function () {
+                        location.reload();
+                    });
+                } else {
+                    var info = {
+                        name: company_name,
+                        code: company_code,
+                        key: company_key,
+                        secret: company_secret
+                    };
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: FRANZ_SERVER + "auth/info-lib/",
+                        data: {
+                            app: "bdcsc",
+                            name: "company",
+                            info: JSON.stringify(info)
+                        },
+                        complete: function (xhr, ajaxOptions, thrownError) {
+                            if (xhr.status >= 200 && xhr.status < 300) {
+                                bootbox.hideAll();
+                                bootbox.alert(success_message("新增保险公司成功！"), function () {
+                                    location.reload();
+                                });
+                            } else {
+                                bootbox.hideAll();
+                                bootbox.alert(error_message("新增保险公司失败！"), function () {
+                                    location.reload();
+                                });
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }).on("shown.bs.modal", function () {
@@ -97,29 +108,33 @@ function company_add() {
 }
 
 function company_delete(id) {
-    bootbox.dialog({
-        message: loading_message("载入中..."),
-        closeButton: false
-    });
-    $.ajax({
-        type: "DELETE",
-        dataType: "json",
-        url: FRANZ_SERVER + "auth/info-lib/",
-        data: {
-            id: id
-        },
-        complete: function (xhr, ajaxOptions, thrownError) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                bootbox.hideAll();
-                bootbox.alert(success_message("删除保险公司成功！"), function () {
-                    location.reload();
-                });
-            } else {
-                bootbox.hideAll();
-                bootbox.alert(error_message("新增保险公司失败！"), function () {
-                    location.reload();
-                });
-            }
+    bootbox.confirm(warning_message("确定要删除该保险公司吗？此过程无法恢复。"), function (confirmation) {
+        if (confirmation) {
+            bootbox.dialog({
+                message: loading_message("载入中..."),
+                closeButton: false
+            });
+            $.ajax({
+                type: "DELETE",
+                dataType: "json",
+                url: FRANZ_SERVER + "auth/info-lib/",
+                data: {
+                    id: id
+                },
+                complete: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        bootbox.hideAll();
+                        bootbox.alert(success_message("删除保险公司成功！"), function () {
+                            location.reload();
+                        });
+                    } else {
+                        bootbox.hideAll();
+                        bootbox.alert(error_message("新增保险公司失败！"), function () {
+                            location.reload();
+                        });
+                    }
+                }
+            });
         }
     });
 }

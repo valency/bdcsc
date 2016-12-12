@@ -72,14 +72,10 @@ function ban_user(username, banned) {
 }
 
 function register() {
-    bootbox.dialog({
-        message: loading_message("载入中..."),
-        closeButton: false
-    });
     var html = "<div class='form-group'>";
     html += "<div class='input-group'>";
     html += "<span class='input-group-addon'>用户名</span>";
-    html += "<input id='register-username' class='form-control'/>";
+    html += "<input id='register-username' class='form-control' placeholder='仅支持英文、数字、下划线'/>";
     html += "</div>";
     html += "</div>";
     html += "<div class='form-group'>";
@@ -127,7 +123,7 @@ function register() {
                                 complete: function (xhr, ajaxOptions, thrownError) {
                                     if (xhr.status >= 200 && xhr.status < 300) {
                                         bootbox.hideAll();
-                                        bootbox.alert("<p>" + success_message("注册账户成功！") + "</p><pre>USERNAME: " + username + "<br/>PASSWORD: " + password_plain + "</pre>", function () {
+                                        bootbox.alert("<p>" + success_message("注册账户成功！") + "</p><pre>用户名：" + username + "<br/>密码：" + password_plain + "</pre>", function () {
                                             location.reload();
                                         });
                                     } else {

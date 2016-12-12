@@ -80,3 +80,7 @@ function api_logging(api_type, api_request, api_response) {
         }
     });
 }
+
+function is_empty(s) {
+    return s == null || s == undefined || s == "";
+}

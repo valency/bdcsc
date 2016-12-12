@@ -44,7 +44,11 @@ function change_password() {
             "确定": function () {
                 var change_password_old = $("#change_password_old").val();
                 var change_password_new = $("#change_password_new").val();
-                if (change_password_new != $("#change_password_new_repeat").val()) {
+                if (is_empty(change_password_old) || is_empty(change_password_new)) {
+                    bootbox.alert(error_message("无法修改密码：密码为空，请重新输入！"), function () {
+                        change_password();
+                    });
+                } else if (change_password_new != $("#change_password_new_repeat").val()) {
                     bootbox.alert(error_message("无法修改密码：两次输入的密码不一样，请重新输入！"), function () {
                         change_password();
                     });
