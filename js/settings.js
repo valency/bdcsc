@@ -15,7 +15,7 @@ var API_LIST = {
         name: "中国电信手机号",
         example: "18988843180",
         verify: function (m) {
-            var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
+            var pattern = /^(133|153|173|177|180|181|189)\d{8}$|^(170[0-2])\d{7}$/;
             return pattern.test(m);
         }
     }, {
@@ -45,7 +45,7 @@ var API_LIST = {
         name: "中国电信手机号",
         example: "18106518081",
         verify: function (m) {
-            var pattern = /^(?:180|189|133|153|181|177|149)-?\d{5}(\d{3}|\*{3})$/;
+            var pattern = /^(133|153|173|177|180|181|189)\d{8}$|^(170[0-2])\d{7}$/;
             return pattern.test(m);
         }
     }, {
