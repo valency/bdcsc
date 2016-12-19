@@ -1,5 +1,5 @@
 var FRANZ_SERVER = "/api/franz/";
-var API_SERVER = "/ext/hawk/";
+var API_SERVER = "fake/";
 var API_LIST = {
     blacklistStatus: [{
         id: "mdn",

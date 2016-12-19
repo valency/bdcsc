@@ -1,0 +1,10 @@
+{
+  "code": 200,
+  "status": "SUCCEED",
+  "message": "",
+  "time": "2016-12-19 15:43:12",
+  "trace": "",
+  "data": {
+    "value": "success"
+  }
+}

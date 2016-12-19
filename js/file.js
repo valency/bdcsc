@@ -62,12 +62,12 @@ function send_file(file) {
     });
     $.get("data/" + file, function (content) {
         $.ajax({
-            type: "POST",
+            type: "GET",
             dataType: "json",
-            url: API_SERVER + "rp-label/antifraud/blacklistInfo/" + Cookies.get("bdcsc-key") + "/" + Cookies.get("bdcsc-token") + ".json",
+            url: API_SERVER + "rp-label/antifraud/blacklistInfo.json",
             data: {
-                insuranceCompanyKey: INSURANCE_COMPANY_KEY,
-                blacklist: content
+                insuranceCompanyKey: INSURANCE_COMPANY_KEY
+                // blacklist: content
             },
             complete: function (xhr, ajaxOptions, thrownError) {
                 if (xhr.status >= 200 && xhr.status < 300) {
