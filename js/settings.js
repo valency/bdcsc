@@ -1,4 +1,4 @@
-var FRANZ_SERVER = "/api/franz/";
+var FRANZ_SERVER = "/api/deepfox/";
 var API_SERVER = "/ext/hawk/";
 var API_LIST = {
     blacklistStatus: [{

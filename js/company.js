@@ -8,7 +8,7 @@ $(document).ready(function () {
     $.get(FRANZ_SERVER + "auth/info-lib/?app=bdcsc&name=company", function (resp) {
         for (var i = 0; i < resp.length; i++) {
             var company = resp[i];
-            var info = eval("(" + company["info"] + ")");
+            var info = company["info"];
             var html = "<tr>";
             html += "<td>" + info["name"] + "</td>";
             html += "<td>" + info["code"] + "</td>";

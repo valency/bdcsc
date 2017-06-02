@@ -19,7 +19,7 @@ function login() {
             $.get(FRANZ_SERVER + "auth/detail/", function (data) {
                 if (data["misc"] != undefined && data["misc"]["bdcsc_company"] != undefined) {
                     $.get(FRANZ_SERVER + "auth/info-lib/?id=" + data["misc"]["bdcsc_company"], function (company) {
-                        var info = eval("(" + company["info"] + ")");
+                        var info = company["info"];
                         Cookies.set('bdcsc-key', info["key"]);
                         Cookies.set('bdcsc-code', info["code"]);
                         $.get(API_SERVER + "system/publicKey.json?apiKey=" + info["key"], function (resp) {
