@@ -2,10 +2,7 @@ var INSURANCE_COMPANY_KEY = null;
 
 $(document).ready(function () {
     auth_check(function (resp) {
-        $.get(FRANZ_SERVER + "auth/info-lib/?id=" + resp["misc"]["bdcsc_company"], function (resp) {
-            var info = eval("(" + resp["info"] + ")");
-            INSURANCE_COMPANY_KEY = info["code"];
-        });
+            INSURANCE_COMPANY_KEY = 'bymwDDXGZEA2xDzVwTCS6gQ6yOWrYXX3';
     });
     var p = get_url_parameter("f");
     if (p == undefined || p == null || p == "") p = 0;
