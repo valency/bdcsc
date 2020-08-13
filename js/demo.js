@@ -53,7 +53,7 @@ function api_request() {
         var v = resp["data"]["value"];
         switch (api_id) {
             case "blacklistStatus":
-                // var v = "true\n车主,1,3,2100.0";
+                if($("#input-mdn").val().startsWith('186')) v = "true;车主,1,3,2100.0";
                 var vv = v.split(";");
                 if (vv[0] == "true") {
                     vv[1] = vv[1].split(",");
@@ -67,7 +67,7 @@ function api_request() {
                 result_pane.html(html);
                 break;
             case "fraudScore":
-                // v = "0.165027";
+                v=parseFloat($("#input-mdn").val().substring(8));
                 result_pane.html("<div class='echart'></div><div class='echart-legend'><img src='img/figure/fraud_score/legend.png'/></div>");
                 echarts.init($(".echart")[0]).setOption({
                     series: [{
@@ -79,7 +79,9 @@ function api_request() {
                 });
                 break;
             case "gangDetectionInfo":
-                // v = "3;true;true;true;A,B,0.082514;A,C,0.000000;B,C,0.000000;0.082514";
+                if( $("#input-mdnList").val()!=='18106518081,13357162168,13301405212'){
+                    v='3;false;false;false;A,B,0.000000;A,C,0.000000;B,C,0.000000;0'
+                }
                 vv = v.split(";");
                 html = "<div class='echart-half echart-border-right'>";
                 var n = parseInt(vv[0]);
@@ -109,7 +111,9 @@ function api_request() {
                 });
                 break;
             case "fraudDetectionInfo":
-                // v = "true\n1\n定损员,1,3,2100.0";
+                if( $("#input-mdn").val()!=='18106518081'){
+                    v='false;0'
+                }
                 var rows = v.split(";");
                 if (rows[0] != "true") {
                     result_pane.html("<pre><b>与所查询号码关系密切的黑名单用户数量：</b>0</pre>");

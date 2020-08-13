@@ -70,17 +70,17 @@ function convert_django_time(t) {
 }
 
 function api_logging(api_type, api_request, api_response) {
-    $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: FRANZ_SERVER + "auth/log/",
-        data: {
-            app: "bdcsc",
-            type: api_type,
-            request: api_request,
-            response: api_response
-        }
-    });
+    // $.ajax({
+    //     type: "POST",
+    //     dataType: "json",
+    //     url: FRANZ_SERVER + "auth/log/",
+    //     data: {
+    //         app: "bdcsc",
+    //         type: api_type,
+    //         request: api_request,
+    //         response: api_response
+    //     }
+    // });
 }
 
 function is_empty(s) {

@@ -1,4 +1,4 @@
-var FRANZ_SERVER = "/api/franz/";
+var FRANZ_SERVER = null;
 var API_SERVER = "fake/";
 var API_LIST = {
     blacklistStatus: [{
